@@ -23,9 +23,21 @@ services:
     volumes:
       - registry_data:/var/lib/registry
       - ./config.yml:/etc/distribution/config.yml:ro
+  zot:
+    image: ghcr.io/project-zot/zot:v2.1.22
+    container_name: zot
+    restart: always
+    ports:
+      - "5002:5000"
+    volumes:
+      - zot_data:/var/lib/registry
+      - ./zot/config.json:/etc/zot/config.json:ro
+      - ./zot/credentials.json:/etc/zot/credentials.json:ro
 
 volumes:
    registry_data:
       name: container_registry_data
    cache_data:
       name: package_cache_data
+   zot_data:
+      name: zot_data

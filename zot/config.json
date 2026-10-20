@@ -1,0 +1,32 @@
+{
+  "distSpecVersion": "1.1.1",
+  "storage": {
+    "rootDirectory": "/var/lib/registry",
+    "dedupe": true,
+    "gc": true,
+    "gcInterval": "24h",
+    "retention": {
+      "policies": [{
+        "repositories": ["**"],
+        "deleteUntagged": true,
+        "keepTags": [{ "patterns": [".*"], "pulledWithin": "720h", "pushedWithin": "720h" }]
+      }]
+    }
+  },
+  "http": { "address": "0.0.0.0", "port": "5000", "compat": ["docker2s2"] },
+  "log": { "level": "info" },
+  "extensions": {
+    "sync": {
+      "enable": true,
+      "credentialsFile": "/etc/zot/credentials.json",
+      "registries": [{
+        "urls": ["https://ark.stackhpc.com"],
+        "onDemand": true,
+        "tlsVerify": true,
+        "manifestCheckInterval": "24h",
+        "content": [{ "prefix": "stackhpc-dev/**" }, { "prefix": "stackhpc/**" }]
+      }]
+    },
+    "scrub": { "enable": true, "interval": "24h" }
+  }
+}
