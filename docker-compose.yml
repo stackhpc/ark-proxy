@@ -13,19 +13,19 @@ services:
       - ./galaxy.conf:/etc/nginx/conf.d/galaxy.conf:ro
       - ./pypi.conf:/etc/nginx/conf.d/pypi.conf:ro
     restart: always
-  docker-registry:
-    image: registry:3
-    container_name: docker-registry
+  zot:
+    image: ghcr.io/project-zot/zot:v2.1.22
+    container_name: zot
     restart: always
     ports:
       - "5000:5000"
-      - "5001:5001"
     volumes:
-      - registry_data:/var/lib/registry
-      - ./config.yml:/etc/distribution/config.yml:ro
+      - zot_data:/var/lib/registry
+      - ./zot/config.json:/etc/zot/config.json:ro
+      - ./zot/credentials.json:/etc/zot/credentials.json:ro
 
 volumes:
-   registry_data:
-      name: container_registry_data
    cache_data:
       name: package_cache_data
+   zot_data:
+      name: zot_data
