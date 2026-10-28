@@ -16,6 +16,8 @@
   "http": { "address": "0.0.0.0", "port": "5000", "compat": ["docker2s2"] },
   "log": { "level": "info" },
   "extensions": {
+    "scrub": { "enable": true, "interval": "24h" },
+    "search": { "enable": true },
     "sync": {
       "enable": true,
       "credentialsFile": "/etc/zot/credentials.json",
@@ -27,6 +29,6 @@
         "content": [{ "prefix": "stackhpc-dev/**" }, { "prefix": "stackhpc/**" }]
       }]
     },
-    "scrub": { "enable": true, "interval": "24h" }
+    "ui": { "enable": true }
   }
 }
